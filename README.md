@@ -1,4 +1,4 @@
-# 🚀 InternshipPort - AI Internship Recommendation System
+# 🚀 HORIZON NEXT - AI Internship Recommendation System
 
 An AI-powered internship and job recommendation platform that analyzes resumes, extracts skills, and recommends relevant opportunities using modern NLP and Recommendation System techniques.
 
