@@ -113,7 +113,7 @@ Personalized Recommendations
 - MySQL
 
 ### Deployment
-- Render (Backend)
+- Railway (Backend)
 - Vercel (Frontend)
 
 ---
@@ -256,7 +256,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-Backend runs on:
+Backend runs on:(Railway)
 
 ```text
 https://internshipport-production.up.railway.app/
@@ -264,7 +264,7 @@ https://internshipport-production.up.railway.app/
 
 ---
 
-### Frontend Setup
+### Frontend Setup:(Vercel)
 
 ```bash
 cd jobnext
