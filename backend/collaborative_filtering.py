@@ -196,6 +196,7 @@ def get_hybrid_recommendations(user_id, cursor, top_n=10, alpha=0.5):
         return get_fallback_recommendations(user_id, cursor, top_n)
 
     df = pd.DataFrame(interactions, columns=["user_id", "job_id", "rating"])
+    df["rating"] = df["rating"].astype(float)
     
     if user_id not in df["user_id"].values:
         return get_fallback_recommendations(user_id, cursor, top_n)

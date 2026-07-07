@@ -1,3 +1,4 @@
+import os
 import PyPDF2
 import pandas as pd
 import spacy
@@ -14,7 +15,9 @@ nlp = spacy.load(
 
 # LOAD SKILLS DATABASE
 
-skills_df = pd.read_csv("datasets/skills_dataset.csv")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+skills_path = os.path.join(BASE_DIR, "datasets", "skills_dataset.csv")
+skills_df = pd.read_csv(skills_path)
 
 SKILLS_DB = skills_df[
     "Skills"

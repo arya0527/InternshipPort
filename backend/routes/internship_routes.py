@@ -1,3 +1,4 @@
+import os
 from flask import Blueprint
 from flask import jsonify
 
@@ -11,9 +12,9 @@ internship_bp = Blueprint(
 @internship_bp.route('/internships', methods=['GET'])
 def get_internships():
 
-    internships_df = pd.read_csv(
-        'datasets/internships.csv'
-    )
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    csv_path = os.path.join(BASE_DIR, 'datasets', 'internships.csv')
+    internships_df = pd.read_csv(csv_path)
 
     internships = internships_df.to_dict(
         orient='records'

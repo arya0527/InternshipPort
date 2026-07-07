@@ -1,13 +1,19 @@
+import os
 import mysql.connector
 import random
+from dotenv import load_dotenv
+
+# Load local environment variables
+load_dotenv()
 
 def seed_database():
     print("Connecting to the database...")
     db = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="Aryabhat@10",
-        database="internship_ai"
+        host=os.getenv("MYSQL_HOST", "localhost"),
+        user=os.getenv("MYSQL_USER", "root"),
+        password=os.getenv("MYSQL_PASSWORD", ""),
+        database=os.getenv("MYSQL_DB", "internship_db"),
+        port=int(os.getenv("MYSQL_PORT") or "3306")
     )
     cursor = db.cursor()
 

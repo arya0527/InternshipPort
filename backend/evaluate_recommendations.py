@@ -1,7 +1,12 @@
+import os
 import pandas as pd
 import numpy as np
 import mysql.connector
 from sklearn.model_selection import train_test_split
+from dotenv import load_dotenv
+
+# Load local environment variables
+load_dotenv()
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import MinMaxScaler
 from scipy.sparse.linalg import svds
@@ -133,10 +138,11 @@ def select_top_k_mmr(scores_dict, job_job_sim, job_idx_map, K=5, lmbda=0.5):
 
 def load_data():
     db = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="Aryabhat@10",
-        database="internship_ai"
+        host=os.getenv("MYSQL_HOST", "localhost"),
+        user=os.getenv("MYSQL_USER", "root"),
+        password=os.getenv("MYSQL_PASSWORD", ""),
+        database=os.getenv("MYSQL_DB", "internship_db"),
+        port=int(os.getenv("MYSQL_PORT") or "3306")
     )
     cursor = db.cursor()
     
@@ -161,6 +167,7 @@ def load_data():
         raise ValueError("No interaction data found in database. Run seed_interactions.py first.")
         
     interactions_df = pd.DataFrame(interactions, columns=["user_id", "job_id", "rating"])
+    interactions_df["rating"] = interactions_df["rating"].astype(float)
     return interactions_df, user_skills_dict, job_skills_dict
 
 def evaluate():

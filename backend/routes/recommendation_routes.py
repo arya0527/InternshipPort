@@ -1,3 +1,4 @@
+import os
 from flask import Blueprint
 from flask import request
 from flask import jsonify
@@ -21,9 +22,9 @@ def recommend():
     data = request.json
     user_skills = data["skills"]
 
-    internships_df = pd.read_csv(
-        "datasets/internships.csv"
-    )
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    csv_path = os.path.join(BASE_DIR, "datasets", "internships.csv")
+    internships_df = pd.read_csv(csv_path)
 
     recommendations = recommend_internships(
         user_skills,

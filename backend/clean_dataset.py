@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 
 postings = pd.read_csv(
@@ -53,7 +54,9 @@ jobs = jobs.dropna(
     ]
 )
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+output_path = os.path.join(BASE_DIR, "datasets", "final_jobs.csv")
 jobs.to_csv(
-    r"C:\Users\Arya\OneDrive\Desktop\AI internship\backend\datasets\final_jobs.csv",
+    output_path,
     index=False
 )
