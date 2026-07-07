@@ -17,6 +17,19 @@ app.config.from_object(Config)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
 mysql.init_app(app)
+import os
+
+@app.route("/envcheck")
+def envcheck():
+    return {
+        "MYSQLHOST": os.getenv("MYSQLHOST"),
+        "MYSQLUSER": os.getenv("MYSQLUSER"),
+        "MYSQLDATABASE": os.getenv("MYSQLDATABASE"),
+        "MYSQLPORT": os.getenv("MYSQLPORT"),
+        "CONFIG_HOST": app.config.get("MYSQL_HOST"),
+        "CONFIG_USER": app.config.get("MYSQL_USER"),
+        "CONFIG_DB": app.config.get("MYSQL_DB")
+    }
 @app.route("/")
 def home():
     return {"message": "Backend running successfully"}
