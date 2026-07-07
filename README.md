@@ -259,7 +259,7 @@ python app.py
 Backend runs on:
 
 ```text
-http://localhost:5000
+https://internshipport-production.up.railway.app/
 ```
 
 ---
@@ -277,7 +277,7 @@ npm run dev
 Frontend runs on:
 
 ```text
-http://localhost:5173
+https://internship-port.vercel.app/
 ```
 
 ---
