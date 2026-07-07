@@ -14,9 +14,7 @@ nlp = spacy.load(
 
 # LOAD SKILLS DATABASE
 
-skills_df = pd.read_csv(
-    r"C:\Users\Arya\Downloads\skills_dataset.csv"
-)
+skills_df = pd.read_csv("datasets/skills_dataset.csv")
 
 SKILLS_DB = skills_df[
     "Skills"
