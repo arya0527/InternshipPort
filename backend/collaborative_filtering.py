@@ -184,7 +184,7 @@ def get_hybrid_recommendations(user_id, cursor, top_n=10, alpha=0.5):
     cursor.execute("SELECT user_id, job_id, rating FROM user_interactions")
     interactions = cursor.fetchall()
     
-    cursor.execute("SELECT job_id, required_skills FROM jobs WHERE required_skills IS NOT NULL LIMIT 200")
+    cursor.execute("SELECT job_id, required_skills FROM jobs WHERE required_skills IS NOT NULL LIMIT 600")
     candidate_jobs_raw = cursor.fetchall()
     candidate_jobs = [row[0] for row in candidate_jobs_raw]
     candidate_skills_dict = {row[0]: row[1] for row in candidate_jobs_raw}
@@ -293,7 +293,7 @@ def get_fallback_recommendations(user_id, cursor, top_n=10):
     user_skills = user_row[0]
     
     # Fetch candidate jobs
-    cursor.execute("SELECT job_id, company_name, role, required_skills, location, salary, description FROM jobs WHERE required_skills IS NOT NULL LIMIT 200")
+    cursor.execute("SELECT job_id, company_name, role, required_skills, location, salary, description FROM jobs WHERE required_skills IS NOT NULL LIMIT 600")
     jobs = cursor.fetchall()
     
     if not jobs:
