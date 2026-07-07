@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import DashboardLayout from '../components/DashboardLayout';
 import JobCard from '../components/JobCard';
 import { jobs as mockJobs } from '../data/jobs';
+import { API_BASE_URL } from '../services/api';
 import './ExperiencedDashboard.css';
 
 const industries = ['All', 'IT Services', 'Fintech', 'Food Tech', 'E-commerce'];
@@ -27,7 +28,7 @@ export default function ExperiencedDashboard({ activePage, setActivePage }) {
     const fetchJobs = async () => {
       if (user && user.user_id) {
         try {
-          const response = await fetch(`http://localhost:5000/recommend/collaborative/${user.user_id}`);
+          const response = await fetch(`${API_BASE_URL}/recommend/collaborative/${user.user_id}`);
           if (response.ok) {
             const data = await response.json();
             if (data.recommendations && data.recommendations.length > 0) {
@@ -64,7 +65,7 @@ export default function ExperiencedDashboard({ activePage, setActivePage }) {
 
     if (user && user.user_id && id && isSaving) {
       try {
-        await fetch('http://localhost:5000/recommend/interaction', {
+        await fetch(`${API_BASE_URL}/recommend/interaction`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -100,7 +101,7 @@ export default function ExperiencedDashboard({ activePage, setActivePage }) {
 
     if (user && user.user_id && job.id) {
       try {
-        await fetch('http://localhost:5000/recommend/interaction', {
+        await fetch(`${API_BASE_URL}/recommend/interaction`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -128,7 +129,7 @@ export default function ExperiencedDashboard({ activePage, setActivePage }) {
       const formData = new FormData();
       formData.append('resume', file);
 
-      const response = await fetch('http://localhost:5000/upload_resume', {
+      const response = await fetch(`${API_BASE_URL}/upload_resume`, {
         method: 'POST',
         body: formData,
       });

@@ -1,4 +1,4 @@
-const API_URL = "http://127.0.0.1:5000";
+export const API_BASE_URL = "https://internshipport-production.up.railway.app";
 
 export const uploadResume = async (
   file
@@ -12,7 +12,7 @@ export const uploadResume = async (
   );
 
   const response = await fetch(
-    `${API_URL}/upload_resume`,
+    `${API_BASE_URL}/upload_resume`,
     {
       method: "POST",
       body: formData

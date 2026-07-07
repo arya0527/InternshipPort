@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import DashboardLayout from '../components/DashboardLayout';
 import JobCard from '../components/JobCard';
 import { internships as mockInternships } from '../data/jobs';
+import { API_BASE_URL } from '../services/api';
 import './StudentDashboard.css';
 
 export default function StudentDashboard({ activePage, setActivePage }) {
@@ -20,9 +21,9 @@ export default function StudentDashboard({ activePage, setActivePage }) {
   useEffect(() => {
     const fetchInternships = async () => {
       try {
-        let url = 'http://localhost:5000/internships';
+        let url = `${API_BASE_URL}/internships`;
         if (user && user.user_id) {
-          url = `http://localhost:5000/recommend/collaborative/${user.user_id}`;
+          url = `${API_BASE_URL}/recommend/collaborative/${user.user_id}`;
         }
         const response = await fetch(url);
         if (response.ok) {
@@ -63,7 +64,7 @@ export default function StudentDashboard({ activePage, setActivePage }) {
 
     if (user && user.user_id && id && isSaving) {
       try {
-        await fetch('http://localhost:5000/recommend/interaction', {
+        await fetch(`${API_BASE_URL}/recommend/interaction`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -98,7 +99,7 @@ export default function StudentDashboard({ activePage, setActivePage }) {
 
     if (user && user.user_id && job.id) {
       try {
-        await fetch('http://localhost:5000/recommend/interaction', {
+        await fetch(`${API_BASE_URL}/recommend/interaction`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -125,8 +126,7 @@ export default function StudentDashboard({ activePage, setActivePage }) {
       const formData = new FormData();
       formData.append('resume', file);
 
-      // Call AI Internship upload_resume endpoint on Flask port 5000
-      const response = await fetch('http://localhost:5000/upload_resume', {
+      const response = await fetch(`${API_BASE_URL}/upload_resume`, {
         method: 'POST',
         body: formData,
       });

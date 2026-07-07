@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Modal.css";
+import { API_BASE_URL } from "../services/api";
 
 function Modal({ type, onClose }) {
   const [modalType, setModalType] = useState(type); // 'login' or 'signup'
@@ -27,8 +28,8 @@ function Modal({ type, onClose }) {
 
     const endpoint =
       modalType === "login"
-        ? "http://127.0.0.1:5000/login"
-        : "http://127.0.0.1:5000/register";
+        ? `${API_BASE_URL}/login`
+        : `${API_BASE_URL}/register`;
 
     try {
       const response = await fetch(endpoint, {
